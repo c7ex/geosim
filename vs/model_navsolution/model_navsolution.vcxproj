@@ -110,7 +110,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../src/lina;../../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +126,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../src/lina;../../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\constellation.hpp" />
+    <ClInclude Include="..\..\src\lina\lina_matrix.hpp" />
+    <ClInclude Include="..\..\src\lina\lina_specification.hpp" />
+    <ClInclude Include="..\..\src\lina\lina_vector.hpp" />
     <ClInclude Include="..\..\src\p3pcr_specification.hpp" />
     <ClInclude Include="..\..\src\p3p_appendices.hpp" />
     <ClInclude Include="..\..\src\p3p_specification.hpp" />

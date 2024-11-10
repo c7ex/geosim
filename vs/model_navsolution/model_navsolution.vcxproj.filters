@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="src\lina">
+      <UniqueIdentifier>{f9a7594a-426d-4718-be2e-02a05520e47e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\start.cpp">
@@ -23,6 +26,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\constellation.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_matrix.hpp">
+      <Filter>src\lina</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_specification.hpp">
+      <Filter>src\lina</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_vector.hpp">
+      <Filter>src\lina</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

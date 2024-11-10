@@ -11,9 +11,12 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
-.tlog
-.pdb
-.idb
-.vsidx
-.ipch
-.exe
+vs/.vs/*
+*.tlog
+*.pdb
+*.ilk
+*.idb
+*.vsidx
+*.ipch
+*.exe
+*.vsidx

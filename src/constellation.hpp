@@ -5,7 +5,8 @@
 #include<vector>
 #include<random>
 
-#define show_prepare_distanse
+#define show_prepare_distance
+#define show_prepare_point
 
 #include"p3pcr_specification.hpp"
 typedef p3p<double>          pos;
@@ -20,7 +21,7 @@ typedef struct constellation_settings
 } conset;
 
 // create random "guide" vector (x, y, z)
-pos& create_magic_coeff(pos& point, double range)
+pos create_magic_coeff(pos& point, double range)
 {
 	auto magic = rand();                                        // random number
 
@@ -55,9 +56,14 @@ void create_geometric_positioning(const pos& ref, pos& point, double range)
 
 	point.set(point_x, point_y, point_z);
 
-#ifdef show_prepare_distanse
-	std::cout << range << "\t" << range << p3p_app::distance(ref, point) << "\n";
+#ifdef show_prepare_distance
+	std::cout << range << "\t" << p3p_app::distance(ref, point);
+#ifdef show_prepare_point
+	std::cout << "\t" << point;
 #endif
+	std::cout << "\n";
+#endif
+
 }
 
 // create distance
