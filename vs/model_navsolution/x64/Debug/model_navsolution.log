@@ -1,3 +1,3 @@
 ﻿  start.cpp
-C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\src\lina\lina_matrix.hpp(106): warning C4172: возвращение адреса локальной или временной переменной
+C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\src\lina\lina_math.hpp(112): warning C4715: lina::triangular_matrix<double>: значение возвращается не при всех путях выполнения
   model_navsolution.vcxproj -> C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\bin\Debug\model_navsolution.exe

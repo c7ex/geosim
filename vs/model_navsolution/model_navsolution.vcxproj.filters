@@ -27,13 +27,16 @@
     <ClInclude Include="..\..\src\constellation.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\lina\lina_matrix.hpp">
-      <Filter>src\lina</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\lina\lina_specification.hpp">
       <Filter>src\lina</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\lina\lina_vector.hpp">
+    <ClInclude Include="..\..\src\lina\lina_obj.hpp">
+      <Filter>src\lina</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_math.hpp">
+      <Filter>src\lina</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_lrobjanalyse.hpp">
       <Filter>src\lina</Filter>
     </ClInclude>
   </ItemGroup>
