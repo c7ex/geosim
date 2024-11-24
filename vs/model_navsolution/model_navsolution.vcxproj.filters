@@ -39,5 +39,8 @@
     <ClInclude Include="..\..\src\lina\lina_lrobjanalyse.hpp">
       <Filter>src\lina</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\lina\lina_test.hpp">
+      <Filter>src\lina</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

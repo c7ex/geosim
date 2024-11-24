@@ -1,0 +1,9 @@
+﻿  start.cpp
+  Создание кода
+C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\src\lina\lina_math.hpp(12): warning C4172: возвращение адреса локальной или временной переменной : output
+C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\src\lina\lina_test.hpp(20): warning C4172: возвращение адреса локальной или временной переменной : tmp
+  151 of 189 functions (79.9%) were compiled, the rest were copied from previous compilation.
+    95 functions were new in current compilation
+    6 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  model_navsolution.vcxproj -> C:\Users\c7exe\OneDrive\Рабочий стол\ModelPos\navsolution\bin\Release\model_navsolution.exe

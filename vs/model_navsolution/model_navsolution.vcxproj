@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\src\lina\lina_obj.hpp" />
     <ClInclude Include="..\..\src\lina\lina_specification.hpp" />
     <ClInclude Include="..\..\src\lina\lina_math.hpp" />
+    <ClInclude Include="..\..\src\lina\lina_test.hpp" />
     <ClInclude Include="..\..\src\p3pcr_specification.hpp" />
     <ClInclude Include="..\..\src\p3p_appendices.hpp" />
     <ClInclude Include="..\..\src\p3p_specification.hpp" />

@@ -1,5 +1,18 @@
 #pragma once
 
+namespace lina {
+	constexpr auto prec = 1e-10;
+}
+
+namespace lina {
+	template<typename T>
+	_obj<T>& tr(_obj<T>& input) {
+		_obj<T> output = input;
+		output.tr();
+		return output;
+	}
+}
+
 template <typename T>
 lina::_obj<T> operator+ (lina::_obj<T>& l_obj, lina::_obj<T>& r_obj) {
 	lina::lrobjanalyse<T> analyse(l_obj, r_obj);
@@ -83,6 +96,27 @@ namespace lina {
 		}
 	}
 
+	template <typename T>
+	bool valid_matrix(_obj<T>& obj) {
+		for (auto line = 0; line < obj.get_count_lines(); line++) {
+			T summary = 0;
+			for (auto column = 0; column < obj.get_count_columns(); column++)
+				summary += abs(obj.get_elem(line, column));
+			if (summary < prec) 
+				return false;
+		}
+
+		for (auto column = 0; column < obj.get_count_columns(); column++) {
+			T summary = 0;
+			for (auto line = 0; line < obj.get_count_lines(); line++)
+				summary += abs(obj.get_elem(line, column));
+			if (summary < prec)
+				return false;
+		}
+
+		return true;
+	}
+
 	// udf - do "up" or "down" triangular matrix
 	// upf = true - do "up"
 	// upf = false - do "down"
@@ -91,7 +125,7 @@ namespace lina {
 		for (auto index = udf ? 0 : size - 1; index < size; udf ? index++ : index--) {
 			size_t curr_line = index;
 			size_t next_line = udf ? index + 1 : index - 1;
-			if (next_line >= size) return true;
+			if (next_line >= size) break;
 
 			T divider_value = c_obj.get_elem(index, index);
 			if (!divider_value) return false;
@@ -109,30 +143,40 @@ namespace lina {
 				lina::line_subtraction(e_obj, multiplier, index, line, size);
 			}
 		}
+
+		return valid_matrix<T>(c_obj);
 	}
 }
 
 template <typename T>
-lina::_obj<T> operator! (lina::_obj<T>& obj) {
+lina::_obj<T> operator! (lina::_obj<T> obj) {
 	lina::lrobjanalyse<T> analyse(obj, obj);
 	lina::_obj<T> result;
 	if (analyse.mvf_only_Lrvs()) {
-		lina::_obj<T> c_matrix;
 		lina::_obj<T> e_matrix;
-		c_matrix.set_obj(obj);
-		e_matrix.set_obj(obj);
-
+		lina::_obj<T> c_matrix;
+		
 		auto size = obj.get_count_lines();
 		lina::init_e_matrix(e_matrix, size);
+		c_matrix.set_obj(obj);
 
-		// do "up"-triangular matrix
 		if (!lina::triangular_matrix(c_matrix, e_matrix, size, true)) 	return result;
-
-		// do "down"-triangular matrix -> do once-matrix
 		if (!lina::triangular_matrix(c_matrix, e_matrix, size, false)) 	return result;
 
 		result = e_matrix;
 	}
 
 	return result;
+}
+
+namespace lina {
+	template <typename T>
+	lina::_obj<T> pseudoinverse(lina::_obj<T>& obj) {
+
+		lina::_obj<T> tmp1 = lina::tr(obj) * obj;
+		lina::_obj<T> tmp2 = !tmp1;
+		lina::_obj<T> result = tmp2 * lina::tr(obj);
+
+		return result;
+	}
 }

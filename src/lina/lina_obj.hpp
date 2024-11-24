@@ -78,7 +78,7 @@ namespace lina {
 			}
 		}
 
-		void cnt_fill(vect<T> input) {
+		void cnt_fill(vect<T>& input) {
 			if (!_vf) return;
 			for (auto line = 0; line < _lines; line++) {
 				for (auto column = 0; column < _columns; column++) {
@@ -87,12 +87,34 @@ namespace lina {
 			}
 		}
 
-		void cnt_fill(vect<vect<T>> input) {
+		void cnt_fill(vect<vect<T>>& input) {
 			if (!_vf) return;
 			for (auto line = 0; line < _lines; line++) {
 				for (auto column = 0; column < _columns; column++) {
 					_cnt[line][column] = input[column][line];
 				}
+			}
+		}
+
+		void cnt_fill(list<T> input) {
+			if (!_vf) return;
+			T* column_ptr = (T*)input.begin();
+			for (auto line = 0; line < _lines; line++) {
+				for (auto column = 0; column < _columns; column++) {
+					_cnt[line][column] = *column_ptr++;
+				}
+			}
+		}
+
+		void cnt_fill(list<list<T>> input) {
+			if (!_vf) return;
+			list<T>* line_ptr = (list<T>*)input.begin();
+			for (auto line = 0; line < _lines; line++) {
+				T* column_ptr = (T*)line_ptr->begin();
+				for (auto column = 0; column < _columns; column++) {
+					_cnt[line][column] = *column_ptr++;
+				}
+				line_ptr++;
 			}
 		}
 
@@ -107,10 +129,8 @@ namespace lina {
 
 		void post_init(){
 			if (!_vf) return;
-			if (mathobj_mode) {
-				tr();
-				_tr = !mathobj_mode;
-			}
+			if (mathobj_mode) 
+				line_column_swap();
 		}
 
 		void line_column_swap()
@@ -189,6 +209,8 @@ namespace lina {
 			vrftypes();
 			_columns = columns;
 			_lines = lines;
+			if (lina::mathobj_mode)
+				line_column_swap();
 			malloc_line();
 			malloc_column();
 			cnt_fill();
@@ -218,11 +240,17 @@ namespace lina {
 		}
 
 	public:
-		_obj() {
-			clear();
+		void operator= (_obj<T>& other) {
+			_vf = other._vf;
+			_tr = other._tr;
+			_columns = other._columns;
+			_lines = other._lines;
+			malloc_line();
+			malloc_column();
+			cnt_fill(other);
 		}
 
-		_obj(vect<T> input) {
+		void operator= (vect<T>& input) {
 			vrftypes();
 			_columns = init_column;
 			_lines = input.size();
@@ -232,10 +260,77 @@ namespace lina {
 			post_init();
 		}
 
-		_obj(vect<vect<T>> input) {
+		void operator= (vect<vect<T>>& input) {
 			vrftypes();
 			_columns = input.size();
 			_lines = input[frst_index].size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+		void operator= (list<T> input) {
+			vrftypes();
+			_columns = init_column;
+			_lines = input.size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+		void operator= (list<list<T>> input) {
+			vrftypes();
+			list<T>* ptr = (list<T>*)input.begin();
+			_columns = ptr->size();
+			_lines = input.size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+	public:
+		_obj() {
+			clear();
+		}
+
+		_obj(vect<T>& input) {
+			vrftypes();
+			_columns = init_column;
+			_lines = input.size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+		_obj(vect<vect<T>>& input) {
+			vrftypes();
+			_columns = input.size();
+			_lines = input[frst_index].size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+		_obj(list<T> input) {
+			vrftypes();
+			_columns = init_column;
+			_lines = input.size();
+			malloc_line();
+			malloc_column();
+			cnt_fill(input);
+			post_init();
+		}
+
+		_obj(list<list<T>> input) {
+			vrftypes();
+			list<T>* ptr = (list<T>*)input.begin();
+			_columns = ptr->size();
+			_lines = input.size();
 			malloc_line();
 			malloc_column();
 			cnt_fill(input);
@@ -250,18 +345,16 @@ std::ostream& operator << (std::ostream& os, lina::_obj<L> obj)
 	if(obj.get_vf()) {
 		size_t last_column = obj.get_count_columns() - 1;
 		size_t last_line = obj.get_count_lines() - 1;
-
 		for (auto line = 0; line <= last_line; line++) {
 			os << "{";
-
 			for (auto column = 0; column <= last_column; column++) {
 				os << obj.get_elem(line, column);
 				if (column != last_column)
 					os << ", ";
 			}
-			
 			os << "}\n";
 		}
+		os << "\n";
 	}
 	return os;
 }
